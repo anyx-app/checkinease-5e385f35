@@ -29,3 +29,13 @@ Sections/Features:
 
 UI: Mobile-friendly portal inspired by Airbnb - welcoming hero section, clear access instructions, and card-based layout for local tips and house rules.
 
+
+## {anyx d353b1ab-8000-4418-ab19-6b967fdd7a24} - 2026-02-03 23:00:44
+
+Commit: `pending`
+Branch: `feature/d353b1ab-8000-4418-ab19-6b967fdd7a24`
+
+feat: add auth callback page for handling oauth redirects
+
+---
+
