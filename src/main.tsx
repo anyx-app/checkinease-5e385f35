@@ -1,16 +1,40 @@
-import { createRoot } from 'react-dom/client'
-import App from './App.tsx'
-import './index.css'
-import { ErrorBoundary } from './components/ErrorBoundary'
-import { ThemeProvider } from './theme/ThemeProvider'
+import React from 'react';
+import ReactDOM from 'react-dom/client';
+import App from './App.tsx';
+import './index.css';
+import './lib/console-logger'; // CRITICAL: DO NOT DELETE THIS LINE
+import { ErrorBoundary } from './components/ErrorBoundary'; // Ensure this component exists or use a simple wrapper
+import { BrowserRouter } from 'react-router-dom';
 
-// Initialize console logger (must be before any other imports that might log)
-import './lib/console-logger'
+// Simple ErrorBoundary if not imported (Self-contained for safety)
+class SafeErrorBoundary extends React.Component<{ children: React.ReactNode }, { hasError: boolean }> {
+  constructor(props: { children: React.ReactNode }) {
+    super(props);
+    this.state = { hasError: false };
+  }
 
-createRoot(document.getElementById("root")!).render(
-  <ErrorBoundary>
-    <ThemeProvider>
-      <App />
-    </ThemeProvider>
-  </ErrorBoundary>
+  static getDerivedStateFromError() {
+    return { hasError: true };
+  }
+
+  componentDidCatch(error: any, errorInfo: any) {
+    console.error("Uncaught error:", error, errorInfo);
+  }
+
+  render() {
+    if (this.state.hasError) {
+      return <div className="p-4 text-red-500">Something went wrong. Please refresh.</div>;
+    }
+    return this.props.children;
+  }
+}
+
+ReactDOM.createRoot(document.getElementById('root')!).render(
+  <React.StrictMode>
+    <SafeErrorBoundary>
+      <BrowserRouter>
+        <App />
+      </BrowserRouter>
+    </SafeErrorBoundary>
+  </React.StrictMode>,
 );

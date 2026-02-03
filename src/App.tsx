@@ -1,32 +1,30 @@
-import { Toaster } from "@/components/ui/toaster";
-import { Toaster as Sonner } from "@/components/ui/sonner";
-import { TooltipProvider } from "@/components/ui/tooltip";
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { ThemeProvider } from "@/theme/ThemeProvider";
-import Index from "./pages/Index";
+import React from 'react';
+import { Routes, Route } from 'react-router-dom';
+import AppShell from './components/layout/AppShell';
+import Home from './pages/Home';
 
-const queryClient = new QueryClient();
-
-/**
- * Default App structure for single-page applications.
- * 
- * For multi-page apps with routing:
- * 1. Import BrowserRouter, Routes, Route from 'react-router-dom'
- * 2. Wrap content in <BrowserRouter><Routes>...</Routes></BrowserRouter>
- * 3. Add routes: <Route path="/about" element={<About />} />
- * 
- * See docs/ROUTING.md for detailed instructions.
- */
-const App = () => (
-  <QueryClientProvider client={queryClient}>
-    <TooltipProvider>
-      <Toaster />
-      <Sonner />
-      <ThemeProvider>
-        <Index />
-      </ThemeProvider>
-    </TooltipProvider>
-  </QueryClientProvider>
+// Placeholder for other pages to prevent router errors if expanded later
+const Placeholder = ({ title }: { title: string }) => (
+  <div className="container mx-auto px-4 py-20 text-center">
+    <h1 className="text-3xl font-bold text-slate-800 mb-4">{title}</h1>
+    <p className="text-slate-500">This page is under construction.</p>
+  </div>
 );
+
+function App() {
+  return (
+    <Routes>
+      <Route path="/" element={<AppShell />}>
+        <Route index element={<Home />} />
+        <Route path="features" element={<Placeholder title="Features" />} />
+        <Route path="pricing" element={<Placeholder title="Pricing" />} />
+        <Route path="about" element={<Placeholder title="About Us" />} />
+        <Route path="login" element={<Placeholder title="Login" />} />
+        {/* Catch-all for 404 */}
+        <Route path="*" element={<div className="container mx-auto px-4 py-20 text-center text-slate-500">Page not found</div>} />
+      </Route>
+    </Routes>
+  );
+}
 
 export default App;
