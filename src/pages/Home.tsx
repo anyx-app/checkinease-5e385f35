@@ -27,9 +27,9 @@ export default function Home() {
           </p>
           
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-16">
-            <button className="w-full sm:w-auto px-8 py-4 text-base font-bold text-white bg-[#5C6BC0] rounded-full hover:bg-indigo-600 hover:scale-105 active:scale-95 transition-all shadow-lg hover:shadow-indigo-500/30">
+            <Link to="/onboarding" className="w-full sm:w-auto px-8 py-4 text-base font-bold text-white bg-[#5C6BC0] rounded-full hover:bg-indigo-600 hover:scale-105 active:scale-95 transition-all shadow-lg hover:shadow-indigo-500/30 inline-block">
               Start for Free
-            </button>
+            </Link>
             <button className="w-full sm:w-auto px-8 py-4 text-base font-bold text-slate-600 bg-white border border-slate-200 rounded-full hover:bg-slate-50 hover:text-slate-900 active:scale-95 transition-all">
               View Demo
             </button>
@@ -102,11 +102,12 @@ export default function Home() {
           <p className="text-indigo-100 text-lg mb-10 max-w-2xl mx-auto">
             Join thousands of hosts who are saving time and impressing guests with CheckInEase.
           </p>
-          <button className="px-10 py-4 bg-white text-indigo-700 font-bold rounded-full text-lg shadow-xl hover:bg-indigo-50 hover:scale-105 active:scale-95 transition-all">
+          <Link to="/onboarding" className="px-10 py-4 bg-white text-indigo-700 font-bold rounded-full text-lg shadow-xl hover:bg-indigo-50 hover:scale-105 active:scale-95 transition-all inline-block">
             Get Started Now
-          </button>
+          </Link>
         </div>
       </section>
     </div>
   );
 }
+
