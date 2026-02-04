@@ -35,6 +35,15 @@ export function setSession(session: AuthSession) {
 
 export async function signOut() {
   if (typeof window === 'undefined') return;
+  
+  // Optional: Call backend to revoke token if supported
+  try {
+    await authRequest('/logout', 'POST');
+  } catch (e) {
+    // Ignore error on logout
+    console.warn('Logout API call failed', e);
+  }
+
   window.localStorage.removeItem(STORAGE_KEY);
   window.dispatchEvent(new CustomEvent('auth-session-change', { detail: null }));
 }
@@ -50,6 +59,12 @@ async function authRequest(endpoint: string, method: string, body?: any) {
   const headers: Record<string, string> = {
     'Content-Type': 'application/json',
   };
+
+  // Add auth token if available (for logout or other authenticated requests)
+  const session = getSession();
+  if (session?.access_token) {
+    headers['Authorization'] = `Bearer ${session.access_token}`;
+  }
 
   const response = await fetch(`${AUTH_BASE_URL}${endpoint}`, {
     method,
@@ -90,6 +105,21 @@ export async function signup(email: string, password: string, metadata?: Record<
   });
 }
 
+export async function confirm(token: string, type: string, redirectTo?: string): Promise<{ session: AuthSession; user: AuthUser }> {
+  const data = await authRequest('/verify', 'POST', { token, type, redirect_to: redirectTo });
+  
+  const session: AuthSession = {
+    user: data.user,
+    access_token: data.session.access_token,
+    refresh_token: data.session.refresh_token,
+    expires_in: data.session.expires_in,
+    token_type: data.session.token_type,
+  };
+
+  setSession(session);
+  return { session, user: data.user };
+}
+
 export async function initiateOAuth(provider: string, redirectTo: string): Promise<{ auth_url: string }> {
   return authRequest(`/oauth/${provider}`, 'POST', { redirect_to: redirectTo });
 }
@@ -107,23 +137,8 @@ export function handleCallback(): AuthSession | null {
   }
 
   if (accessToken) {
-    // We might not have the full user object here, but we have the token.
-    // We can decode the token or fetch the user if there's an endpoint.
-    // For now, we'll construct a minimal session.
-    // Ideally, the backend redirect should include user info or we fetch it.
-    // But standard Supabase flow often just gives tokens in hash/query.
-    // The backend proxy documentation says it redirects with tokens.
-    
-    // We can try to decode the JWT to get the user ID/email if needed, 
-    // or just store the token and let the app fetch the user profile later.
-    
-    // For this implementation, we'll create a session with a placeholder user
-    // or try to parse the token if we had a library.
-    // Since we don't want to add dependencies, we'll assume the app will 
-    // fetch the user profile using the token if needed, or we can decode the JWT payload manually.
-    
     const session: AuthSession = {
-      user: null, // Will be populated by fetching profile or decoding token
+      user: null, 
       access_token: accessToken,
       refresh_token: refreshToken || undefined,
     };

@@ -1,7 +1,18 @@
 import React from 'react';
-import { Outlet, Link } from 'react-router-dom';
+import { Outlet, Link, useNavigate } from 'react-router-dom';
+import { useAuth } from '@/hooks/useAuth';
+import { Button } from '@/components/ui/button';
+import { LogOut, LayoutDashboard } from 'lucide-react';
 
 export default function AppShell() {
+  const { user, signOut } = useAuth();
+  const navigate = useNavigate();
+
+  const handleSignOut = async () => {
+    await signOut();
+    navigate('/');
+  };
+
   return (
     <div className="min-h-screen bg-slate-50 text-slate-800 font-sans selection:bg-indigo-100 selection:text-indigo-900 overflow-x-hidden">
       {/* Navigation Header */}
@@ -23,12 +34,35 @@ export default function AppShell() {
           </nav>
 
           <div className="flex items-center gap-4">
-            <Link to="/login" className="hidden md:block text-sm font-medium text-slate-600 hover:text-[#5C6BC0] transition-colors">
-              Log in
-            </Link>
-            <button className="px-5 py-2 text-sm font-semibold text-white bg-[#5C6BC0] rounded-full hover:bg-indigo-600 active:scale-95 transition-all shadow-[0_4px_14px_0_rgba(92,107,192,0.39)] hover:shadow-[0_6px_20px_rgba(92,107,192,0.23)]">
-              Get Started
-            </button>
+            {user ? (
+              <>
+                <Link to="/dashboard">
+                  <Button variant="ghost" className="text-slate-600 hover:text-[#5C6BC0]">
+                    <LayoutDashboard className="w-4 h-4 mr-2" />
+                    Dashboard
+                  </Button>
+                </Link>
+                <Button 
+                  onClick={handleSignOut}
+                  variant="ghost" 
+                  className="text-slate-600 hover:text-red-600"
+                >
+                  <LogOut className="w-4 h-4 mr-2" />
+                  Logout
+                </Button>
+              </>
+            ) : (
+              <>
+                <Link to="/login" className="hidden md:block text-sm font-medium text-slate-600 hover:text-[#5C6BC0] transition-colors">
+                  Log in
+                </Link>
+                <Link to="/login">
+                  <button className="px-5 py-2 text-sm font-semibold text-white bg-[#5C6BC0] rounded-full hover:bg-indigo-600 active:scale-95 transition-all shadow-[0_4px_14px_0_rgba(92,107,192,0.39)] hover:shadow-[0_6px_20px_rgba(92,107,192,0.23)]">
+                    Get Started
+                  </button>
+                </Link>
+              </>
+            )}
             {/* Mobile Menu Button */}
             <button className="md:hidden p-2 text-slate-600 hover:bg-black/5 rounded-lg transition-colors">
               <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -98,3 +132,4 @@ export default function AppShell() {
     </div>
   );
 }
+
