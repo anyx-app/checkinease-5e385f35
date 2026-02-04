@@ -30,12 +30,12 @@ Sections/Features:
 UI: Mobile-friendly portal inspired by Airbnb - welcoming hero section, clear access instructions, and card-based layout for local tips and house rules.
 
 
-## {anyx 0b1169bd-ba00-4f97-9661-2881b0de1d60} - 2026-02-04 22:08:35
+## {anyx 0b1169bd-ba00-4f97-9661-2881b0de1d60} - 2026-02-04 22:11:42
 
-Commit: `9a787d885b57e7fddd91197d5e6eeb4f35240bdf`
+Commit: `HEAD`
 Branch: `feature/0b1169bd-ba00-4f97-9661-2881b0de1d60`
 
-Implemented Onboarding page with HeroCTA and FeatureShowcase. Registered /onboarding route and updated Home page 'Get Started' buttons to link to the new page. Verified with lint and build.
+Implemented Onboarding page with HeroCTA and FeatureShowcase. Linked 'Get Started' buttons from Home page to /onboarding. Registered route in App.tsx.
 
 ---
 
