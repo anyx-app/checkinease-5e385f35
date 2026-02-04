@@ -16,6 +16,7 @@ export interface PricingTier {
   features: string[]
   cta: string
   highlighted?: boolean
+  onCtaClick?: () => void
 }
 
 export interface HeroCTAProps {
@@ -238,6 +239,7 @@ export function HeroCTA({
                   className="w-full mb-6"
                   size="lg"
                   variant={tier.highlighted ? 'default' : 'outline'}
+                  onClick={tier.onCtaClick}
                 >
                   {tier.cta}
                 </Button>

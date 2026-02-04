@@ -2,6 +2,8 @@ import React from 'react';
 import { Routes, Route } from 'react-router-dom';
 import AppShell from './components/layout/AppShell';
 import Home from './pages/Home';
+import Onboarding from './pages/Onboarding';
+import Auth from './pages/Auth';
 
 // Placeholder for other pages to prevent router errors if expanded later
 const Placeholder = ({ title }: { title: string }) => (
@@ -19,7 +21,9 @@ function App() {
         <Route path="features" element={<Placeholder title="Features" />} />
         <Route path="pricing" element={<Placeholder title="Pricing" />} />
         <Route path="about" element={<Placeholder title="About Us" />} />
-        <Route path="login" element={<Placeholder title="Login" />} />
+        <Route path="login" element={<Auth />} />
+        <Route path="auth" element={<Auth />} />
+        <Route path="onboarding" element={<Onboarding />} />
         {/* Catch-all for 404 */}
         <Route path="*" element={<div className="container mx-auto px-4 py-20 text-center text-slate-500">Page not found</div>} />
       </Route>
@@ -28,3 +32,4 @@ function App() {
 }
 
 export default App;
+
