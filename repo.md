@@ -30,12 +30,12 @@ Sections/Features:
 UI: Mobile-friendly portal inspired by Airbnb - welcoming hero section, clear access instructions, and card-based layout for local tips and house rules.
 
 
-## {anyx d353b1ab-8000-4418-ab19-6b967fdd7a24} - 2026-02-03 23:02:10
+## {anyx d353b1ab-8000-4418-ab19-6b967fdd7a24} - 2026-02-04 08:41:35
 
-Commit: `0d7484a5e9cf9750cdae4d2aa1dd72ce4c57f673`
+Commit: `2d05696e8ee8ea628eafbe03fe73833600bb9c6e`
 Branch: `feature/d353b1ab-8000-4418-ab19-6b967fdd7a24`
 
-Updated App.tsx to include routes for /login (Auth) and /auth/callback (AuthCallback).
+Implemented auth UI, callback page, and updated navigation header to reflect auth state.
 
 ---
 
