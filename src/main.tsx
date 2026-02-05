@@ -5,6 +5,7 @@ import './index.css';
 import './lib/console-logger'; // CRITICAL: DO NOT DELETE THIS LINE
 import { ErrorBoundary } from './components/ErrorBoundary'; // Ensure this component exists or use a simple wrapper
 import { BrowserRouter } from 'react-router-dom';
+import { ThemeProvider } from './theme/ThemeProvider';
 
 // Simple ErrorBoundary if not imported (Self-contained for safety)
 class SafeErrorBoundary extends React.Component<{ children: React.ReactNode }, { hasError: boolean }> {
@@ -33,8 +34,11 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
     <SafeErrorBoundary>
       <BrowserRouter>
-        <App />
+        <ThemeProvider>
+          <App />
+        </ThemeProvider>
       </BrowserRouter>
     </SafeErrorBoundary>
   </React.StrictMode>,
 );
+
