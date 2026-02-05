@@ -39,3 +39,13 @@ Verified implementation of Onboarding page and Home page links. Validation passe
 
 ---
 
+
+## {anyx b0ff7bb1-492a-464f-860a-df169df17f41} - 2026-02-05 07:59:20
+
+Commit: `a96270edef723ed692deb28ce2b10f4aa8446d54`
+Branch: `feature/b0ff7bb1-492a-464f-860a-df169df17f41`
+
+Fixed 'useTheme must be used within <ThemeProvider>' error by wrapping the App component with ThemeProvider in src/main.tsx. This ensures theme context is available globally to all components, including the Onboarding page.
+
+---
+
