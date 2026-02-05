@@ -4,6 +4,7 @@ import AppShell from './components/layout/AppShell';
 import Home from './pages/Home';
 import Onboarding from './pages/Onboarding';
 import Auth from './pages/Auth';
+import Demo from './pages/Demo';
 
 // Placeholder for other pages to prevent router errors if expanded later
 const Placeholder = ({ title }: { title: string }) => (
@@ -21,6 +22,7 @@ function App() {
         <Route path="features" element={<Placeholder title="Features" />} />
         <Route path="pricing" element={<Placeholder title="Pricing" />} />
         <Route path="about" element={<Placeholder title="About Us" />} />
+        <Route path="demo" element={<Demo />} />
         <Route path="login" element={<Auth />} />
         <Route path="auth" element={<Auth />} />
         <Route path="onboarding" element={<Onboarding />} />
