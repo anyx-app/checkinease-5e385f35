@@ -30,9 +30,9 @@ export default function Home() {
             <Link to="/onboarding" className="w-full sm:w-auto px-8 py-4 text-base font-bold text-white bg-[#5C6BC0] rounded-full hover:bg-indigo-600 hover:scale-105 active:scale-95 transition-all shadow-lg hover:shadow-indigo-500/30 inline-block">
               Start for Free
             </Link>
-            <button className="w-full sm:w-auto px-8 py-4 text-base font-bold text-slate-600 bg-white border border-slate-200 rounded-full hover:bg-slate-50 hover:text-slate-900 active:scale-95 transition-all">
+            <Link to="/demo" className="w-full sm:w-auto px-8 py-4 text-base font-bold text-slate-600 bg-white border border-slate-200 rounded-full hover:bg-slate-50 hover:text-slate-900 active:scale-95 transition-all inline-block text-center">
               View Demo
-            </button>
+            </Link>
           </div>
 
           {/* Hero Image / Mockup Placeholder */}
